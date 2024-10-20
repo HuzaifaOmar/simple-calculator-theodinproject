@@ -95,9 +95,14 @@ body {
 
 #display {
   background-color: #627a77;
-  padding: 20px;
-  width: 100%;
-  height: 130px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: baseline;
+  gap: 15px;
+  max-width: 330px;
+  width: 330px;
+  height: auto; /* Makes the height adjustable */
   color: #e0e0e0;
   font-size: 36px;
   text-align: right;
@@ -105,7 +110,26 @@ body {
   box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
+#previous-operations,
+#result {
+  width: 100%; /* Use full width */
+  padding: 0 5px; /* Common padding */
+  background-color: #627a77; /* Consistent background */
+  border-radius: 10px; /* Consistent border radius */
+  overflow-wrap: break-word; /* Break long numbers to avoid overflow */
+  word-wrap: break-word; /* For compatibility */
+  white-space: normal; /* Allows wrapping to the next line */
+  text-align: right; /* Align text to the right */
+}
+
 #previous-operations {
-  font-size: 18px;
-  color: #b0bec5;
+  font-size: 24px;
+  color: #272727; /* Text color for previous operations */
+}
+
+#result {
+  font-size: 40px; /* Larger font for current result */
+  font-weight: 600; /* Bold font weight for emphasis */
+  color: #000000; /* Text color for the current result */
+  min-height: 60px; /* Minimum height */
 }
