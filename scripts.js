@@ -53,7 +53,7 @@ function handleClearClick() {
 }
 
 function handleEqualClick() {
-  if (currNum) expression.push(parseInt(currNum));
+  if (currNum) expression.push(parseFloat(currNum));
   evaluateExpr();
   prevOpsDisplay.innerText = resultDisplay.innerText;
   currNum = "";
@@ -74,7 +74,7 @@ function appendNum(num) {
 }
 
 function handleOp(operator) {
-  if (currNum) expression.push(parseInt(currNum));
+  if (currNum) expression.push(parseFloat(currNum));
   else if (
     expression[expression.length - 1] === "+" ||
     expression[expression.length - 1] === "-" ||
@@ -87,8 +87,10 @@ function handleOp(operator) {
   expression.push(operator);
   currNum = "";
   resultDisplay.innerText = "";
-  prevOpsDisplay.innerText = `${expression[0]} ${operator}`;
   evaluateExpr();
+  if (typeof expression[expression.length - 1] == "number")
+    expression.push(operator);
+  prevOpsDisplay.innerText = `${expression[0]} ${operator}`;
 }
 
 function removeLastExpr() {
