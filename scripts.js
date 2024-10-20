@@ -96,21 +96,15 @@ function removeLastExpr() {
   let prev = expression[expression.length - 1];
   expression.pop();
   if (prev === "+" || prev === "-" || prev === "×" || prev === "÷")
-    prevOpsDisplay.innerText = prevOpsDisplay.innerText.slice(
-      0,
-      -2
-    );
+    prevOpsDisplay.innerText = prevOpsDisplay.innerText.slice(0, -2);
   else {
-    prevOpsDisplay.innerText = prevOpsDisplay.innerText.slice(
-      0,
-      -1
-    );
+    prevOpsDisplay.innerText = prevOpsDisplay.innerText.slice(0, -1);
     if (Math.abs(prev) > 10) expression.push(Math.floor(prev / 10));
     else
-      prevOpsDisplay.innerText = "",
-      expression = [],
-      currNum = "",
-      resultDisplay.innerText = "";
+      (prevOpsDisplay.innerText = ""),
+        (expression = []),
+        (currNum = ""),
+        (resultDisplay.innerText = "");
   }
 }
 
@@ -128,4 +122,19 @@ equalBtn.addEventListener("click", handleEqualClick);
 
 backspaceBtn.addEventListener("click", handleBackspaceClick);
 
-
+document.addEventListener("keydown", handleKeyPress);
+function handleKeyPress(e) {
+  const key = e.key;
+  if (!isNaN(key)) {
+    appendNum(key);
+  } else if (["+", "-", "*", "/"].includes(key)) {
+    const op = key === "*" ? "×" : key === "/" ? "÷" : key;
+    handleOp(op);
+  } else if (key === "Enter") {
+    handleEqualClick();
+  } else if (key === "Backspace") {
+    handleBackspaceClick();
+  } else if (key === "Escape") {
+    handleClearClick();
+  }
+}
